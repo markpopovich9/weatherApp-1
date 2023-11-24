@@ -6,5 +6,5 @@ cursor = data.cursor()
 screen = ctk.CTk()
 height = 0
 width = 0
-
+reg = False
 path = os.path.abspath(__file__+"/../../fonts/RobotoSlap-bold.ttf")

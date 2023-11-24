@@ -1,7 +1,7 @@
 import customtkinter 
 import modules.data_base as m_data
 #import modules.ctk.start as ctk_start 
-import modules.ctk.registration as ctk_rg
+
 
 #width: 179.59px
 #height: 142px
@@ -18,4 +18,8 @@ d_c.add_column("Users",m_data.cursor,"surname","TEXT")
 d_c.add_column("Users",m_data.cursor,"country","TEXT")
 d_c.add_column("Users",m_data.cursor,"place","TEXT")
 
+import modules.ctk.registration as ctk_rg
+
 m_data.screen.mainloop()
+m_data.data.commit()
+m_data.data.close()
