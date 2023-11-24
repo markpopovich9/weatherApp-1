@@ -36,6 +36,7 @@ def registration():
 def enter():
     global button,name_entry,surname_entry,country_entry,place_entry,text1 
     font = ctk.CTkFont(family=m_data.path,size=28,weight=("bold"))
+    
     text1 = ctk.CTkLabel(font=font,master=m_data.screen,width=380,height=55,text="реєстрація користувача",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
     text1.place(x = 38,y = 42)
 

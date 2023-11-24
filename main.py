@@ -1,10 +1,6 @@
 import customtkinter 
+# import modules.ctk.mini 
 import modules.data_base as m_data
-#import modules.ctk.start as ctk_start 
-
-
-#width: 179.59px
-#height: 142px
 
 
 
