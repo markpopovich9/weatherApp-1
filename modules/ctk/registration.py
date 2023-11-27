@@ -37,10 +37,10 @@ def enter():
     global button,name_entry,surname_entry,country_entry,place_entry,text1 
     font = ctk.CTkFont(family=m_data.path,size=28,weight=("bold"))
     
-    text1 = ctk.CTkLabel(font=font,master=m_data.screen,width=380,height=55,text="реєстрація користувача",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
+    text1 = ctk.CTkLabel(font=font,master=m_data.screen,width=380,height=55,text="Реєстрація користувача",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
     text1.place(x = 38,y = 42)
 
-    button = ctk.CTkButton(font= font,master=m_data.screen,width=218,height=46,text="зберигти",border_width=3,fg_color="#096C82",command=registration, border_color= "#FFFFFF",text_color="#FFFFFF",corner_radius=20,bg_color="#5DA7B1")
+    button = ctk.CTkButton(font= font,master=m_data.screen,width=218,height=46,text="Зберегти",border_width=3,fg_color="#096C82",command=registration, border_color= "#FFFFFF",text_color="#FFFFFF",corner_radius=20,bg_color="#5DA7B1")
     button.place(x = 119,y = 546)
 
     name_entry = ctk.CTkEntry(font=font,master=m_data.screen,width = 200,height = 46,placeholder_text="",border_width=3,fg_color="#096C82",bg_color="#5DA7B1",corner_radius=20,border_color="#FFFFFF")
@@ -62,18 +62,18 @@ background.place(x = 0,y = 0)
 
 
 font = ctk.CTkFont(family=m_data.path,size=22,weight=("bold"))
-text2 = ctk.CTkLabel(font= font,master=m_data.screen,width=121,height=31,text="прівище:",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
+text2 = ctk.CTkLabel(font= font,master=m_data.screen,width=121,height=31,text="Прівище:",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
 text2.place(x = 46,y = 405)
 
-text3 = ctk.CTkLabel(font= font, master=m_data.screen,width=87,height=31,text="ім'я:",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
+text3 = ctk.CTkLabel(font= font, master=m_data.screen,width=87,height=31,text="Ім'я:",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
 text3.place(x = 46,y = 306)
 
 m_data.screen.iconbitmap(os.path.abspath(__file__+"/../../../icon.ico"))
 
-text4 = ctk.CTkLabel(font= font,master=m_data.screen,width=87,height=31,text="місто:",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
+text4 = ctk.CTkLabel(font= font,master=m_data.screen,width=87,height=31,text="Місто:",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
 text4.place(x = 46,y = 207)
 
-text5 = ctk.CTkLabel(font= font,master=m_data.screen,width=87,height=31,text="країна:",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
+text5 = ctk.CTkLabel(font= font,master=m_data.screen,width=87,height=31,text="Країна:",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
 text5.place(x = 46,y = 108)
 font = ctk.CTkFont(family=m_data.path,size=18,weight=("bold"))
 
