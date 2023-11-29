@@ -61,20 +61,23 @@ background.place(x = 0,y = 0)
 
 
 
-font = ctk.CTkFont(family=m_data.path,size=22,weight=("bold"))
-text2 = ctk.CTkLabel(font= font,master=m_data.screen,width=121,height=31,text="Прівище:",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
-text2.place(x = 46,y = 405)
-
-text3 = ctk.CTkLabel(font= font, master=m_data.screen,width=87,height=31,text="Ім'я:",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
-text3.place(x = 46,y = 306)
-
 m_data.screen.iconbitmap(os.path.abspath(__file__+"/../../../icon.ico"))
+def back():
+    global text2,text3,text4,text5
+    font = ctk.CTkFont(family=m_data.path,size=22,weight=("bold"))
+    text2 = ctk.CTkLabel(font= font,master=m_data.screen,width=121,height=31,text="Прівище:",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
+    text2.place(x = 46,y = 405)
 
-text4 = ctk.CTkLabel(font= font,master=m_data.screen,width=87,height=31,text="Місто:",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
-text4.place(x = 46,y = 207)
+    text3 = ctk.CTkLabel(font= font, master=m_data.screen,width=87,height=31,text="Ім'я:",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
+    text3.place(x = 46,y = 306)
 
-text5 = ctk.CTkLabel(font= font,master=m_data.screen,width=87,height=31,text="Країна:",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
-text5.place(x = 46,y = 108)
+
+    text4 = ctk.CTkLabel(font= font,master=m_data.screen,width=87,height=31,text="Місто:",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
+    text4.place(x = 46,y = 207)
+
+    text5 = ctk.CTkLabel(font= font,master=m_data.screen,width=87,height=31,text="Країна:",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
+    text5.place(x = 46,y = 108)
+back()
 font = ctk.CTkFont(family=m_data.path,size=18,weight=("bold"))
 
 # transparent
