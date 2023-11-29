@@ -6,6 +6,8 @@ import modules.ctk.text as ct_text
 from PIL import Image
 import os
 import modules.ctk.registration as ct_reg
+import time
+# print(time.)
 def time(text1,number,image,x):
     image = Image.open(os.path.abspath(__file__+f"/../../../images/{image}.png"))
     image = ctk.CTkImage(dark_image=image,size=(54,50))
@@ -34,6 +36,7 @@ def delete():
 
     # ct_reg.text5.place(x = 46,y = 108)
 def create():
+    m_data.screen.title("big screen")
     m_data.width = 1200
     m_data.height  = 800
     background = ctk.CTkButton(master=m_data.screen,width=m_data.width,height=m_data.height,text="",border_width=5,fg_color="#5DA7B1",border_color="#096C82",hover= False,corner_radius=20)
