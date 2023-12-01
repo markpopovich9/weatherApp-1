@@ -7,8 +7,10 @@ from PIL import Image
 import os
 import modules.ctk.registration as ct_reg
 import time
+import modules.api as m_api
 # print(time.)
-def time(text1,number,image,x):
+
+def time1(text1,number,image,x):
     image = Image.open(os.path.abspath(__file__+f"/../../../images/{image}.png"))
     image = ctk.CTkImage(dark_image=image,size=(54,50))
     image = ctk.CTkLabel(master=m_data.screen,width=50,height=52.08,text="",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1",image = image)
@@ -35,7 +37,11 @@ def delete():
     # ct_reg.text4.place(x = 46,y = 207)
 
     # ct_reg.text5.place(x = 46,y = 108)
+data= m_api.get_api()
 def create():
+    temp = m_api.temp(data["main"]["temp"])
+    min_temp =  m_api.temp(data["main"]["temp_min"])
+    max_temp =  m_api.temp(data["main"]["temp_min"])
     m_data.screen.title("big screen")
     m_data.width = 1200
     m_data.height  = 800
@@ -44,7 +50,10 @@ def create():
     m_data.screen.geometry(f"{m_data.width}x{m_data.height}+{m_data.screen.winfo_screenwidth()//2-m_data.width//2}+{m_data.screen.winfo_screenheight()//2-m_data.height//2}")
     font = ctk.CTkFont(family=m_data.path,size=28)
     user_img = Image.open(os.path.abspath(__file__+"/../../../images/user.png"))
-    img_cloudy = Image.open(os.path.abspath(__file__+"/../../../images/cloudy.png"))
+    name_image = data["weather"][0]["main"]
+    # if name_image== "snow":
+
+    img_cloudy = Image.open(os.path.abspath(__file__+f"/../../../images/cloudy.png"))
     img = Image.open(os.path.abspath(__file__+"/../../../images/line.png"))
     img = ctk.CTkImage(dark_image=img,size=(800,2))
     
@@ -62,15 +71,15 @@ def create():
     label = ctk.CTkLabel(master=m_data.screen,width=27,height=27,text="",image=image,fg_color="#096C82")
     label.place(x=918+14,y=31+10)
     # transparent
-    time("Зараз","11","cloudy",19)
-    time("15:00","12","sun",112)
-    time("16:00","10","sun",204)
-    time("16:05","9","sunset",296)
-    time("17:00","8","moon",388)
-    time("18:00","8","moon",480)
-    time("19:00","7","rain_moon",572)
-    time("20:00","5","rain_moon",664)
-    time("21:00","5","rain_moon",756)
+    time1("Зараз",f"{temp}","cloudy",19)
+    time1("15:00","12","sun",112)
+    time1("16:00","10","sun",204)
+    time1("16:05","9","sunset",296)
+    time1("17:00","8","moon",388)
+    time1("18:00","8","moon",480)
+    time1("19:00","7","rain_moon",572)
+    time1("20:00","5","rain_moon",664)
+    time1("21:00","5","rain_moon",756)
     user = ctk.CTkButton(master=m_data.screen,width=48.48,height=50,text="",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="transparent",hover= False,image = user_image,command=delete)
     user.place(x = 318, y = 29)# сложный
     
@@ -83,16 +92,17 @@ def create():
     text1.place(x = 576 ,y = 101)
     text2 = ctk.CTkLabel(font=font,master=m_data.screen,width=87,height=31,text="Дніпро",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
     text2.place(x = 689, y = 162)
-    text3 = ct_text.Text("11⁰",683,203,71,79,80)
+
+    text3 = ct_text.Text(f"{temp}⁰",683,203,71,79,80)
 
     text4 = ct_text.Text(text="Зараз",x=19 + 325,y=54 + 430,height=31,width=56,size=18)
     text5 = ct_text.Text(text="Хмарно",x=663,y=284,height=37,width=140,size=30)
     text6  = ct_text.Text(text="з проясненнями",x=663,y=321,height=16,width=140,size=16)
-    text7 = ct_text.Text(text="↓5⁰",x=673.43,y=345,height=27,width=19.48,size=30)
+    text7 = ct_text.Text(text=f"↓{min_temp}⁰",x=673.43,y=345,height=27,width=19.48,size=30)
     
     
 
-    text9 = ct_text.Text(text="↑11⁰",x=738.03,y=345,height=27,width=30.76,size=30)
+    text9 = ct_text.Text(text=f"↑{max_temp}⁰",x=738.03,y=345,height=27,width=30.76,size=30)
     text10 = ct_text.Text(text="Захід сонця о 16:05. Очікується дощова погода приблизно о 19:00",x=346,y=445,height=31,width=776,size=14)
     
     text11 = ct_text.Text(text="Понеділок",x=956,y=191,height=31,width=105,size=18)

@@ -1,11 +1,13 @@
 import modules.data_base as m_data
 #import modules.ctk.start as c_start 
-# ↑↓ 1⁰
+# ↑↓ 1⁰=
+import modules.api as m_api
 import modules.ctk.text as ct_text
 from PIL import Image
 import customtkinter as ctk
 import os
 import threading
+data = m_api.get_api()
 screen = ctk.CTkToplevel()
 screen.resizable(0,0)
 screen.title("mini screen")
@@ -25,9 +27,12 @@ img3.place(x=17,y=18)
 font = ctk.CTkFont(family=m_data.path,size=40,weight=("bold"))
 text1 = ctk.CTkLabel(font=font,master=screen,width=170,height=52,text="Дніпро",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
 text1.place(x = 180,y = 274)
-text7 = ct_text.Text(text="8⁰",x=259,y=199,height=71,width=61,size=80,master= screen)
-text8 = ct_text.Text(text="↑11⁰",x=118,y=223,height=30,width=55.06,size=30,master=screen)
-text9 = ct_text.Text(text="↓5⁰",x=57,y=223,height=30,width=46.21,size=30,master=screen)
+temp = m_api.temp(data["main"]["temp"])
+min_temp = m_api.temp(data["main"]["temp_min"])
+max_temp =  m_api.temp(data["main"]["temp_min"])
+text7 = ct_text.Text(text=f"{temp}⁰",x=259,y=199,height=71,width=61,size=80,master= screen)
+text8 = ct_text.Text(text=f"↑{max_temp}⁰",x=118,y=223,height=30,width=55.06,size=30,master=screen)
+text9 = ct_text.Text(text=f"↓{min_temp}⁰",x=57,y=223,height=30,width=46.21,size=30,master=screen)
 text11 = ct_text.Text(text="з проясненнями ",x=47,y=188.5,height=26.5,width=0,size=21,master=screen)
 text10 = ct_text.Text(text="Хмарно",x=47,y=162,height=1,width=0,size=30,master=screen)
 #  ct_text.Text(text="↑11⁰",x=188.94,y=223,height=30,width=55.06,size=30)
