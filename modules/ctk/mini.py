@@ -9,6 +9,7 @@ import os
 import threading
 data = m_api.get_api()
 screen = ctk.CTkToplevel()
+screen.iconbitmap(os.path.abspath(__file__+"/../../../icon.ico"))
 screen.resizable(0,0)
 screen.title("mini screen")
 m_data.width = 350

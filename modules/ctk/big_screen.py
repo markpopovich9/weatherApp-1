@@ -9,7 +9,20 @@ import modules.ctk.registration as ct_reg
 import time
 import modules.api as m_api
 # print(time.)
-
+def revision(city_name, text,y,text_1,color= "#096C82"):
+    data1 = m_api.get_api(city_name)
+    text_2 = m_api.text(data1)
+    temp1 = data1["main"]
+    temp2 = m_api.temp(temp1["temp"])
+    temp3 = m_api.temp(temp1["temp_min"])
+    temp4 = m_api.temp(temp1["temp_max"])
+    label = ctk.CTkButton(master=m_data.screen,width=236,height=101,text="",border_color="#FFFFFF",bg_color="#096C82",fg_color=color,corner_radius=20,border_width=2,hover=False,)
+    label.place(x=19,y=y)
+    text1 = ct_text.Text(text=text,x=14+19,y=y+8,height=31,width=56,size=16,fg_color=color)
+    text2 = ct_text.Text(text=text_1,x=14+19,y=y+33,height=31,width=56,size=12,fg_color =color)
+    text3 = ct_text.Text(text=text_2,x=14+19,y=y+76,height=0,width=56,size=12,fg_color=color)
+    text4 = ct_text.Text(text=temp2+"⁰",x=158+19,y=y+12,height=0,width=56,size=50,fg_color=color)
+    text5 = ct_text.Text(text=f"макс.: {temp4}⁰, мин.: {temp3}⁰",x=122+19,y=y+76,height=0,width=56,size=12,fg_color=color)
 def time1(text1,number,image,x):
     image = Image.open(os.path.abspath(__file__+f"/../../../images/{image}.png"))
     image = ctk.CTkImage(dark_image=image,size=(54,50))
@@ -38,7 +51,18 @@ def delete():
 
     # ct_reg.text5.place(x = 46,y = 108)
 data= m_api.get_api()
+print(time.localtime())
 def create():
+    time_now = f"{time.localtime()[3]}:{time.localtime()[4]}"
+    if time.localtime()[4]<10:
+        time_now = f"{time.localtime()[3]}:0{time.localtime()[4]}"
+    time_now1 =f"{time.localtime()[3]-1}:{time.localtime()[4]}"
+    if time.localtime()[4]<10:
+        time_now1 = f"{time.localtime()[3]-1}:0{time.localtime()[4]}"
+    time_now2 = f"{time.localtime()[3]-2}:{time.localtime()[4]}"
+    if time.localtime()[4]<10:
+        time_now2 = f"{time.localtime()[3]-2}:0{time.localtime()[4]}"
+    print(time_now)
     temp = m_api.temp(data["main"]["temp"])
     min_temp =  m_api.temp(data["main"]["temp_min"])
     max_temp =  m_api.temp(data["main"]["temp_min"])
@@ -80,6 +104,13 @@ def create():
     time1("19:00","7","rain_moon",572)
     time1("20:00","5","rain_moon",664)
     time1("21:00","5","rain_moon",756)
+
+    revision("Dnipro","Поточна позиція",31,"Дніпро","#4599A4")
+    revision("Kiev","Київ",164,time_now)
+    revision("Rome","Рим",297,time_now1)
+    revision("London","Лондон",430,time_now2)
+    revision("Warsaw","Варшава",563,time_now1)
+    revision("Prague","Прага",696,time_now1)
     user = ctk.CTkButton(master=m_data.screen,width=48.48,height=50,text="",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="transparent",hover= False,image = user_image,command=delete)
     user.place(x = 318, y = 29)# сложный
     
@@ -96,18 +127,32 @@ def create():
     text3 = ct_text.Text(f"{temp}⁰",683,203,71,79,80)
 
     text4 = ct_text.Text(text="Зараз",x=19 + 325,y=54 + 430,height=31,width=56,size=18)
-    text5 = ct_text.Text(text="Хмарно",x=663,y=284,height=37,width=140,size=30)
-    text6  = ct_text.Text(text="з проясненнями",x=663,y=321,height=16,width=140,size=16)
+    text5 = ct_text.Text(text=m_api.text(data),x=663,y=284,height=37,width=140,size=30)
+    # text6  = ct_text.Text(text="з проясненнями",x=663,y=321,height=16,width=140,size=16)
     text7 = ct_text.Text(text=f"↓{min_temp}⁰",x=673.43,y=345,height=27,width=19.48,size=30)
     
     
 
     text9 = ct_text.Text(text=f"↑{max_temp}⁰",x=738.03,y=345,height=27,width=30.76,size=30)
     text10 = ct_text.Text(text="Захід сонця о 16:05. Очікується дощова погода приблизно о 19:00",x=346,y=445,height=31,width=776,size=14)
-    
-    text11 = ct_text.Text(text="Понеділок",x=956,y=191,height=31,width=105,size=18)
-    text12 = ct_text.Text(text="24.11.23",x=936,y=227,height=47,width=146,size=40)
-    text13 = ct_text.Text(text="21:23",x=974,y=274,height=47,width=70,size=30)
+    day = time.localtime()[-3]
+    if day == 0:
+        day = "Понеділок"
+    elif day == 1:
+        day = "Вівторок"
+    elif day == 2:
+        day = "Середа"
+    elif day == 3:
+        day = "Четверг"
+    elif day == 4:
+        day = "П'ятниця"
+    elif day == 5:
+        day = "Субота"
+    elif day == 6:
+        day = "Неділя"
+    text11 = ct_text.Text(text=day,x=956,y=191,height=31,width=105,size=18)
+    text12 = ct_text.Text(text=f"{time.localtime()[2]}.{time.localtime()[1]}.23",x=936,y=227,height=47,width=146,size=40)
+    text13 = ct_text.Text(text=time_now,x=974,y=274,height=47,width=70,size=30)
     
     text14 = ct_text.Text(text=">",x=1160,y=524,height=31,width=18,size=50)
     text15 = ct_text.Text(text="<",x=289,y=524,height=31,width=18,size=50)
