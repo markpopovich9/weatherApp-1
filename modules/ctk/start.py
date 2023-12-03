@@ -9,7 +9,7 @@ import os
 import modules.ctk.registration as m_reg
 import modules.ctk.big_screen as ct_bg
 # m_data.screen.geometry(f"{m_data.width}x{m_data.height}+{m_data.screen.winfo_screenwidth()//2-m_data.width//2}+{m_data.screen.winfo_screenheight()//2-m_data.width//2}")
-img = ctk.CTkImage(dark_image=Image.open(os.path.abspath(__file__ +"/../../../images/exit.png")))
+img = ctk.CTkImage(dark_image=Image.open(os.path.abspath(__file__ +"/../../../images/left-arrow_10559390.png")))
 def create():
     global text1,exit,text6,text7,text8,text9,button,text10
     m_data.screen.title("Особистий кабінет")

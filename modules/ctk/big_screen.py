@@ -24,7 +24,7 @@ def revision(city_name, text,y,text_1,color= "#096C82"):
     text4 = ct_text.Text(text=temp2+"⁰",x=158+19,y=y+12,height=0,width=56,size=50,fg_color=color)
     text5 = ct_text.Text(text=f"макс.: {temp4}⁰, мин.: {temp3}⁰",x=122+19,y=y+76,height=0,width=56,size=12,fg_color=color)
 def time1(text1,number,image,x):
-    image = Image.open(os.path.abspath(__file__+f"/../../../images/{image}.png"))
+    image = Image.open(os.path.abspath(__file__+f"/../../../images/{m_api.image(data)}.png"))
     image = ctk.CTkImage(dark_image=image,size=(54,50))
     image = ctk.CTkLabel(master=m_data.screen,width=50,height=52.08,text="",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1",image = image)
     image.place(x = x+325 ,y = 104+430)
@@ -73,11 +73,11 @@ def create():
     background.place(x = 0,y = 0)
     m_data.screen.geometry(f"{m_data.width}x{m_data.height}+{m_data.screen.winfo_screenwidth()//2-m_data.width//2}+{m_data.screen.winfo_screenheight()//2-m_data.height//2}")
     font = ctk.CTkFont(family=m_data.path,size=28)
-    user_img = Image.open(os.path.abspath(__file__+"/../../../images/user.png"))
+    user_img = Image.open(os.path.abspath(__file__+"/../../../images/user_9970571.png"))
     name_image = data["weather"][0]["main"]
     # if name_image== "snow":
 
-    img_cloudy = Image.open(os.path.abspath(__file__+f"/../../../images/cloudy.png"))
+    img_cloudy = Image.open(os.path.abspath(__file__+f"/../../../images/{m_api.image(data)}.png"))
     img = Image.open(os.path.abspath(__file__+"/../../../images/line.png"))
     img = ctk.CTkImage(dark_image=img,size=(800,2))
     
