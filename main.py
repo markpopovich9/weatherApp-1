@@ -1,5 +1,5 @@
 import customtkinter 
-import modules.ctk.mini 
+# import modules.ctk.mini 
 import modules.data_base as m_data
 
 
