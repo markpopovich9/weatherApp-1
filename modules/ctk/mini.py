@@ -3,19 +3,33 @@ import modules.data_base as m_data
 # ↑↓ 1⁰=
 import modules.api as m_api
 import modules.ctk.text as ct_text
+import modules.ctk.big_screen as ct_big
 from PIL import Image
 import customtkinter as ctk
 import os
 import threading
+import time
 data = m_api.get_api()
-screen = ctk.CTkToplevel()
+count = 0
+def set_value():
+    global count 
+    time.sleep(1)
+    count = 0
+def big_screen():
+    global count 
+    count += 1 
+    if  count  == 2:
+        ct_big.create()
+    threading.Thread(target=set_value).start()
+    # set_value()
+screen = m_data.screen
 screen.iconbitmap(os.path.abspath(__file__+"/../../../icon.ico"))
 screen.resizable(0,0)
 screen.title("mini screen")
 m_data.width = 350
 m_data.height  = 350
 screen.geometry(f"{m_data.width}x{m_data.height}+{50}+{50}")
-background = ctk.CTkButton(master=screen,width=m_data.width,height=m_data.height,text="",border_width=5,fg_color="#5DA7B1",border_color="#096C82",hover= False,corner_radius=20)
+background = ctk.CTkButton(master=screen,width=m_data.width,height=m_data.height,text="",border_width=5,fg_color="#5DA7B1",border_color="#096C82",hover= False,corner_radius=20,command=big_screen)
 background.place(x = 0,y = 0)
 img1 = Image.open(os.path.abspath(__file__+"/../../../images/captcha_6741193.png"))
 img2 = Image.open(os.path.abspath(__file__+f"/../../../images/{m_api.image(data)}.png"))
@@ -38,4 +52,4 @@ text11 = ct_text.Text(text="з проясненнями ",x=47,y=188.5,height=26
 text10 = ct_text.Text(text="Хмарно",x=47,y=162,height=1,width=0,size=30,master=screen)
 #  ct_text.Text(text="↑11⁰",x=188.94,y=223,height=30,width=55.06,size=30)
 # text9
-# screen.mainloop()
+screen.mainloop()

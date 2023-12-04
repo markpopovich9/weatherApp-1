@@ -16,7 +16,7 @@ def image(data):
         name = "sunny_2412794"
         
     elif weather == "02n":
-        name = "moon_24122729"
+        name = "moon_2412729"
 
     elif weather == "03d" or weather== "04d":
         name = "sunny_2412798"

@@ -77,11 +77,11 @@ def back():
 
     text5 = ctk.CTkLabel(font= font,master=m_data.screen,width=87,height=31,text="Країна:",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
     text5.place(x = 46,y = 108)
-back()
+# back()
 font = ctk.CTkFont(family=m_data.path,size=18,weight=("bold"))
 
 # transparent
 # background_corner_colors=(9,108,130)
 #ctk.Entry - текстовое поле
-enter()
-registration()
+# enter()
+# registration()
