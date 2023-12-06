@@ -1,5 +1,6 @@
 import modules.data_base as m_data
 import customtkinter as ctk 
+import modules.api as m_api
 import os 
 import modules.data.values as d_value
 import modules.ctk.start as ctk_start
@@ -11,28 +12,40 @@ m_data.screen.geometry(f"{m_data.width}x{m_data.height}+{m_data.screen.winfo_scr
 def registration():
     global button,name_entry,surname_entry,country_entry,place_entry
     #get бере текст який ми вказуємо у текстовому полі
-    country = country_entry.get()
-    place =  place_entry.get()
-    name = name_entry.get()
-    surname = surname_entry.get()
-    enter  = False
-    value = d_value.get_value(cursor=m_data.cursor,name_table="Users",name_column="reg")
-    print(d_value.get_value(cursor=m_data.cursor,name_table="Users"))
-    if surname != "" != place != "" != name != "" != country and (not value  or m_data.reg) :
-        enter = True
-        m_data.cursor.execute("INSERT INTO Users (reg,name,surname,country,place) VALUES (?,?,?,?,?)",(1,name,surname,country,place))
-        
+    place = place_entry.get()
+    api = m_api.get_api(place)
+    print(d_value.get_value(cursor=m_data.cursor,name_table="Users",name_column="place"))
+    if type(api) == type(1):
+        try:
+            api = m_api.get_api(d_value.get_value(cursor=m_data.cursor,name_table="Users",name_column="place")[0][0])
+        except:
+            pass
+    print(api)
+    if type(api) != type(1):
 
-    if enter or value:
-        m_data.reg=True
-        text1.destroy()
-        button.destroy()
-        name_entry.destroy()
-        surname_entry.destroy()
-        country_entry.destroy()
-        place_entry.destroy()
-        ctk_start.create()
-        print(name,surname,country,place)
+        for city in m_data.cities:
+            if api["name"]==city:
+
+                country = country_entry.get()
+                name = name_entry.get()
+                surname = surname_entry.get()
+                enter  = False
+                value = d_value.get_value(cursor=m_data.cursor,name_table="Users",name_column="reg")
+                print(d_value.get_value(cursor=m_data.cursor,name_table="Users"))
+                if surname != "" != place != "" != name != "" != country and (not value  or m_data.reg):
+                    enter = True
+                    m_data.cursor.execute("INSERT INTO Users (reg,name,surname,country,place) VALUES (?,?,?,?,?)",(1,name,surname,country,api["name"]))
+                
+
+                if enter or value:
+                    m_data.reg=True
+                    text1.destroy()
+                    button.destroy()
+                    name_entry.destroy()
+                    surname_entry.destroy()
+                    country_entry.destroy()
+                    place_entry.destroy()
+                    ctk_start.create()
 def enter():
     global button,name_entry,surname_entry,country_entry,place_entry,text1 
     font = ctk.CTkFont(family=m_data.path,size=28,weight=("bold"))

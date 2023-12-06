@@ -104,13 +104,21 @@ def create():
     time1("19:00","7","rain_moon",572)
     time1("20:00","5","rain_moon",664)
     time1("21:00","5","rain_moon",756)
+    # range
+    # count = 
 
-    revision("Dnipro","Поточна позиція",31,"Дніпро","#4599A4")
-    revision("Kiev","Київ",164,time_now)
-    revision("Rome","Рим",297,time_now1)
-    revision("London","Лондон",430,time_now2)
-    revision("Warsaw","Варшава",563,time_now1)
-    revision("Prague","Прага",696,time_now1)
+    y = 31
+    for count in range(len(m_data.cities)):
+        data2 = m_api.get_api(m_data.cities[count])
+        if data2["name"]== data["name"]:
+            revision(m_data.cities[count],"Поточна позиція",y,m_data.cities_Ua[count],"#4599A4")
+        else:
+            revision(m_data.cities[count],m_data.cities_Ua[count],y,time_now)
+        y+=133
+    # revision("Rome","Рим",297,time_now1)
+    # revision("London","Лондон",430,time_now2)
+    # revision("Warsaw","Варшава",563,time_now1)
+    # revision("Prague","Прага",696,time_now1)
     user = ctk.CTkButton(master=m_data.screen,width=48.48,height=50,text="",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="transparent",hover= False,image = user_image,command=delete)
     user.place(x = 318, y = 29)# сложный
     
@@ -121,7 +129,7 @@ def create():
     text0.place(x=380,y=39,)
     text1 = ctk.CTkLabel(font=font,master=m_data.screen,width=314,height=61,text="Поточна позіція",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
     text1.place(x = 576 ,y = 101)
-    text2 = ctk.CTkLabel(font=font,master=m_data.screen,width=87,height=31,text="Дніпро",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
+    text2 = ctk.CTkLabel(font=font,master=m_data.screen,width=87,height=31,text=m_data.city,text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
     text2.place(x = 689, y = 162)
 
     text3 = ct_text.Text(f"{temp}⁰",683,203,71,79,80)

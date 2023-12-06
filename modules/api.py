@@ -1,7 +1,8 @@
 import requests
+import modules.data_base as m_data
 # import json
 api_key = "336633f9d31fd19a2d94570ca76d354f"
-# Dnipro, kiev, Rome, London, Warsaw, Prague
+
 def temp(kelvin:float):
     return str(int(kelvin-273.15))
 def image(data): 
@@ -87,7 +88,7 @@ def text(data):
     else:
         text = "Хмарно"
     return text
-def get_api(city_name = "Dnipro"):
+def get_api(city_name = m_data.city):
     url_api = f"https://api.openweathermap.org/data/2.5/weather?q={city_name}&appid={api_key}"
     response = requests.get(url = url_api)
     if response.status_code == 200:
@@ -96,3 +97,4 @@ def get_api(city_name = "Dnipro"):
     else:
         print("Error response")
         print(response)
+        return response.status_code
