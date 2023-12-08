@@ -1,4 +1,5 @@
 import modules.data_base as m_data
+import modules.data.values as d_values
 #import modules.ctk.start as c_start 
 # ↑↓ 1⁰=
 import modules.api as m_api
@@ -40,11 +41,11 @@ img4 = ctk.CTkLabel(master=screen,image=img6,width=15,text="",fg_color="#5DA7B1"
 img4.place(x=300,y=20)
 img3.place(x=17,y=18)
 font = ctk.CTkFont(family=m_data.path,size=40,weight=("bold"))
-text1 = ctk.CTkLabel(font=font,master=screen,width=170,height=52,text="Дніпро",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
+text1 = ctk.CTkLabel(font=font,master=screen,width=170,height=52,text=d_values.get_value("Users",m_data.cursor,"place"),text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
 text1.place(x = 180,y = 274)
 temp = m_api.temp(data["main"]["temp"])
 min_temp = m_api.temp(data["main"]["temp_min"])
-max_temp =  m_api.temp(data["main"]["temp_min"])
+max_temp =  m_api.temp(data["main"]["temp_max"])
 text7 = ct_text.Text(text=f"{temp}⁰",x=259,y=199,height=71,width=61,size=80,master= screen)
 text8 = ct_text.Text(text=f"↑{max_temp}⁰",x=118,y=223,height=30,width=55.06,size=30,master=screen)
 text9 = ct_text.Text(text=f"↓{min_temp}⁰",x=57,y=223,height=30,width=46.21,size=30,master=screen)

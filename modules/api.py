@@ -9,7 +9,7 @@ def image(data):
     name = None
     weather = data["weather"][0]["icon"]
     main = data["weather"][0]["main"]
-    print("n" in weather)
+    # print("n" in weather)
     if weather == "01d":
         name = "sun_2412787"
 
@@ -88,7 +88,9 @@ def text(data):
     else:
         text = "Хмарно"
     return text
-def get_api(city_name = m_data.city):
+def get_api(city_name = None):
+    if city_name == None:
+        city_name = m_data.city
     url_api = f"https://api.openweathermap.org/data/2.5/weather?q={city_name}&appid={api_key}"
     response = requests.get(url = url_api)
     if response.status_code == 200:

@@ -2,7 +2,7 @@ import customtkinter as ctk
 import os
 import sqlite3
 import modules.data.values as d_values
-# Dnipro, kiev, Rome, London, Warsaw, Prague
+
 cities = ["Dnipro", "Kiev", "Rome", "London", "Warsaw", "Prague"]
 cities_Ua = ["Дніпро","Київ","Рим","Лондон","Варшава","Прага"]
 data = sqlite3.connect(os.path.abspath(__file__+"/../../data_base/data.db"))

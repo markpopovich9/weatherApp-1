@@ -61,6 +61,7 @@ def next():
     m_reg.text3.destroy()
     m_reg.text4.destroy()
     m_reg.text5.destroy()
+    print(1)
     ct_bg.create()
     # m_reg.registration.destroy()
 def delete():

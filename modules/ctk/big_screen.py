@@ -24,6 +24,7 @@ def revision(city_name, text,y,text_1,color= "#096C82"):
     text4 = ct_text.Text(text=temp2+"⁰",x=158+19,y=y+12,height=0,width=56,size=50,fg_color=color)
     text5 = ct_text.Text(text=f"макс.: {temp4}⁰, мин.: {temp3}⁰",x=122+19,y=y+76,height=0,width=56,size=12,fg_color=color)
 def time1(text1,number,image,x):
+    data= m_api.get_api()
     image = Image.open(os.path.abspath(__file__+f"/../../../images/{m_api.image(data)}.png"))
     image = ctk.CTkImage(dark_image=image,size=(54,50))
     image = ctk.CTkLabel(master=m_data.screen,width=50,height=52.08,text="",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1",image = image)
@@ -50,22 +51,41 @@ def delete():
     # ct_reg.text4.place(x = 46,y = 207)
 
     # ct_reg.text5.place(x = 46,y = 108)
-data= m_api.get_api()
+
 print(time.localtime())
+def check():
+    global enter
+    text = enter.get()
+    data2 = m_api.get_api(city_name=  text)
+    text = data2["name"]
+    for city in m_data.cities:
+        if city == text:
+            m_data.city = text
+            create()
 def create():
+    global enter
+    data= m_api.get_api()
     time_now = f"{time.localtime()[3]}:{time.localtime()[4]}"
-    if time.localtime()[4]<10:
-        time_now = f"{time.localtime()[3]}:0{time.localtime()[4]}"
     time_now1 =f"{time.localtime()[3]-1}:{time.localtime()[4]}"
-    if time.localtime()[4]<10:
-        time_now1 = f"{time.localtime()[3]-1}:0{time.localtime()[4]}"
     time_now2 = f"{time.localtime()[3]-2}:{time.localtime()[4]}"
+    time_now3 = f"{time.localtime()[3]+1}:{time.localtime()[4]}"
+    time_now4 =  f"{time.localtime()[3]+2}:{time.localtime()[4]}"
     if time.localtime()[4]<10:
+        time_now4 =  f"{time.localtime()[3]+2}:0{time.localtime()[4]}"
+        time_now1 = f"{time.localtime()[3]-1}:0{time.localtime()[4]}"
         time_now2 = f"{time.localtime()[3]-2}:0{time.localtime()[4]}"
-    print(time_now)
+        time_now3 = f"{time.localtime()[3]+1}:0{time.localtime()[4]}"
+        time_now = f"{time.localtime()[3]}:0{time.localtime()[4]}"
+    times = [time_now,time_now,time_now1,time_now2,time_now1,time_now1]
+    # Dnipro, kiev, Rome, London, Warsaw, Prague
+    if m_data.city  == "Rome" or m_data.city =="Warsaw" or m_data.city == "Prague":
+        times = [time_now3,time_now3,time_now,time_now1,time_now,time_now]
+    if m_data.city  == "London":
+        times = [time_now4,time_now4,time_now3,time_now,time_now3,time_now3]
+    # print(time_now)
     temp = m_api.temp(data["main"]["temp"])
     min_temp =  m_api.temp(data["main"]["temp_min"])
-    max_temp =  m_api.temp(data["main"]["temp_min"])
+    max_temp =  m_api.temp(data["main"]["temp_max"])
     m_data.screen.title("big screen")
     m_data.width = 1200
     m_data.height  = 800
@@ -90,10 +110,10 @@ def create():
     background2.place(x =325,y = 430)
     image = Image.open(os.path.abspath(__file__+"/../../../images/search.png"))
     image = ctk.CTkImage(dark_image=image,size=(27,27))
-    enter = ctk.CTkEntry(font=font,master=m_data.screen,width = 218,height = 46,placeholder_text="   Пошук",border_width=3,fg_color = "#096C82",bg_color="#5DA7B1",corner_radius=20,border_color="#FFFFFF")
+    enter = ctk.CTkEntry(font=font,master=m_data.screen,width = 218,height = 46,placeholder_text="Пошук",border_width=3,fg_color = "#096C82",bg_color="#5DA7B1",corner_radius=20,border_color="#FFFFFF")
     enter.place(x=918,y=31)
-    label = ctk.CTkLabel(master=m_data.screen,width=27,height=27,text="",image=image,fg_color="#096C82")
-    label.place(x=918+14,y=31+10)
+    button = ctk.CTkButton(master=m_data.screen,width=0,height=0,text="",image=image,fg_color="#096C82",command=check,bg_color = "#096C82",hover =False)
+    button.place(x=1075+14,y=28+10)
     # transparent
     time1("Зараз",f"{temp}","cloudy",19)
     time1("15:00","12","sun",112)
@@ -113,7 +133,7 @@ def create():
         if data2["name"]== data["name"]:
             revision(m_data.cities[count],"Поточна позиція",y,m_data.cities_Ua[count],"#4599A4")
         else:
-            revision(m_data.cities[count],m_data.cities_Ua[count],y,time_now)
+            revision(m_data.cities[count],m_data.cities_Ua[count],y,times[count])
         y+=133
     # revision("Rome","Рим",297,time_now1)
     # revision("London","Лондон",430,time_now2)
