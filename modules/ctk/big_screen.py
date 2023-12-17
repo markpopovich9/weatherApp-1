@@ -23,9 +23,23 @@ def revision(city_name, text,y,text_1,color= "#096C82"):
     text3 = ct_text.Text(text=text_2,x=14+19,y=y+76,height=0,width=56,size=12,fg_color=color)
     text4 = ct_text.Text(text=temp2+"⁰",x=158+19,y=y+12,height=0,width=56,size=50,fg_color=color)
     text5 = ct_text.Text(text=f"макс.: {temp4}⁰, мин.: {temp3}⁰",x=122+19,y=y+76,height=0,width=56,size=12,fg_color=color)
-def time1(text1,number,image,x):
+def time1(text1,number,image,x,count = 0):
     data= m_api.get_api()
-    image = Image.open(os.path.abspath(__file__+f"/../../../images/{m_api.image(data)}.png"))
+    sunset=m_api.time1(data,sun="set")
+    sunrise=m_api.time1(data,sun="rise")
+    img=m_api.image(data)
+    if count != 0:
+        hour=time.localtime()[3]
+        
+        if str((hour+count)%24)==sunset["hour"]:
+            text1 = sunset["hour"]+":"+sunset["minute"]
+            img="sunset_2412806"
+        elif str((hour+count)%24)==sunrise["hour"]:
+            text1 = sunrise["hour"]+":"+sunrise["minute"]
+            img="sunrise_2412802"
+        else:
+            text1 = str((hour+count)%24)+":00"
+    image = Image.open(os.path.abspath(__file__+f"/../../../images/{img}.png"))
     image = ctk.CTkImage(dark_image=image,size=(54,50))
     image = ctk.CTkLabel(master=m_data.screen,width=50,height=52.08,text="",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1",image = image)
     image.place(x = x+325 ,y = 104+430)
@@ -51,7 +65,9 @@ def delete():
     # ct_reg.text4.place(x = 46,y = 207)
 
     # ct_reg.text5.place(x = 46,y = 108)
-
+    
+#sunset = None
+#sunrise = None
 print(time.localtime())
 def check():
     global enter
@@ -65,6 +81,7 @@ def check():
 def create():
     global enter
     data= m_api.get_api()
+
     time_now = f"{time.localtime()[3]}:{time.localtime()[4]}"
     time_now1 =f"{time.localtime()[3]-1}:{time.localtime()[4]}"
     time_now2 = f"{time.localtime()[3]-2}:{time.localtime()[4]}"
@@ -116,14 +133,16 @@ def create():
     button.place(x=1075+14,y=28+10)
     # transparent
     time1("Зараз",f"{temp}","cloudy",19)
-    time1("15:00","12","sun",112)
-    time1("16:00","10","sun",204)
-    time1("16:05","9","sunset",296)
-    time1("17:00","8","moon",388)
-    time1("18:00","8","moon",480)
-    time1("19:00","7","rain_moon",572)
-    time1("20:00","5","rain_moon",664)
-    time1("21:00","5","rain_moon",756)
+    
+
+    time1("15:00","12","sun",112,1)
+    time1("16:00","10","sun",204,1+1)
+    time1("16:05","9","sunset",296,2+1)
+    time1("17:00","8","moon",388,3+1)
+    time1("18:00","8","moon",480,4+1)
+    time1("19:00","7","rain_moon",572,5+1)
+    time1("20:00","5","rain_moon",664,6+1)
+    time1("21:00","5","rain_moon",756,7+1)
     # range
     # count = 
 
