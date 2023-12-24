@@ -81,13 +81,24 @@ def time1(data:dict,sun = "set"):
     sec = time2%60
     minute = int((time2-sec)%3600/60)
     hour = int(((time2-sec-minute*60)%216000/60/60-3+time3[3])%24)
+    day =  int(((time2-sec-minute*60)%216000/60/60-3+time3[3])/24)
     print(time2,sec,minute,hour,year)
+    if len(str(minute))==1:
+        minute=str(0)+str(minute)
+    if len(str(hour))==1:
+        hour=str(0)+str(hour)
+    if sun == "set":
+        sun = "Захід"
+    else:
+        sun = "Схід"
     return {
         "minute": str(minute),
         "hour": str(hour),
-        "year": str(year)[-2]+str(year)[-1]
-        
+        "year": str(year)[-2]+str(year)[-1],
+        "day": day,
+        "text": str(sun)+str(" сонця о ")+str(hour)+":"+str(minute)
     }
+    # Захід сонця о 20:2
 def text(data):
     name = data["weather"][0]["main"]
     text = ""

@@ -107,7 +107,7 @@ def create():
     m_data.width = 1200
     m_data.height  = 800
     background = ctk.CTkButton(master=m_data.screen,width=m_data.width,height=m_data.height,text="",border_width=5,fg_color="#5DA7B1",border_color="#096C82",hover= False,corner_radius=20)
-    background.place(x = 0,y = 0)
+    background.place(x =0,y = 0)
     m_data.screen.geometry(f"{m_data.width}x{m_data.height}+{m_data.screen.winfo_screenwidth()//2-m_data.width//2}+{m_data.screen.winfo_screenheight()//2-m_data.height//2}")
     font = ctk.CTkFont(family=m_data.path,size=28)
     user_img = Image.open(os.path.abspath(__file__+"/../../../images/user_9970571.png"))
@@ -145,7 +145,32 @@ def create():
     time1("21:00","5","rain_moon",756,7+1)
     # range
     # count = 
-
+    sunset=m_api.time1(data=data)
+    sunrise = m_api.time1(data=data,sun="rise")
+    if sunset["day"]< sunrise["day"]:
+        text = sunset["text"]
+    elif sunset["day"]> sunrise["day"]:
+        text = sunrise["text"]
+    else:
+        if sunset["hour"]< sunrise["hour"]:
+            text = sunset["text"]
+        elif sunset["hour"]> sunrise["hour"]:
+            text = sunrise["text"]
+        else:
+            if sunset["minute"]> sunrise["minute"]:
+                text = sunrise["text"]
+            elif sunrise["minute"]> sunset["minute"]:
+                text = sunset["text"]
+            else:
+                text = sunset["text"]
+    # if sunset["hour"]<sunrise["hour"]:
+    #     text = sunset["text"]
+    #     if sunset["day"]-1:
+    #         text = sunrise["text"]
+    # else:
+    #     text = sunrise["text"]
+    #     if sunrise["day"]-1:
+    #         text = sunset["text"]
     y = 31
     for count in range(len(m_data.cities)):
         data2 = m_api.get_api(m_data.cities[count])
@@ -181,7 +206,8 @@ def create():
     
 
     text9 = ct_text.Text(text=f"↑{max_temp}⁰",x=738.03,y=345,height=27,width=30.76,size=30)
-    text10 = ct_text.Text(text="Захід сонця о 16:05. Очікується дощова погода приблизно о 19:00",x=346,y=445,height=31,width=776,size=14)
+
+    text10 = ct_text.Text(text=text +".",x=346,y=445,height=31,width=776,size=14)
     day = time.localtime()[-3]
     if day == 0:
         day = "Понеділок"
