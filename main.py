@@ -1,7 +1,7 @@
 import customtkinter 
 # import modules.ctk.mini 
 import modules.data_base as m_data
-
+import auto
 
 
 
@@ -18,7 +18,7 @@ import modules.ctk.registration as ctk_rg
 ctk_rg.back()
 ctk_rg.enter()
 ctk_rg.registration()
-
+#понятно, пока
 m_data.screen.mainloop()
 m_data.data.commit()
 m_data.data.close()

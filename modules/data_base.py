@@ -5,7 +5,8 @@ import modules.data.values as d_values
 
 cities = ["Dnipro", "Kiev", "Rome", "London", "Warsaw", "Prague"]
 cities_Ua = ["Дніпро","Київ","Рим","Лондон","Варшава","Прага"]
-data = sqlite3.connect(os.path.abspath(__file__+"/../../data_base/data.db"))
+print(os.path.abspath(__file__+"/../../../data_base/data.db"),'\n',__file__)
+data = sqlite3.connect(os.path.abspath(__file__+"/../../auto/data_base/data.db"))
 cursor = data.cursor()
 try:
     city = d_values.get_value("Users",cursor,"place")[0][0]
