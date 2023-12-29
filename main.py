@@ -3,7 +3,7 @@ import customtkinter
 import modules.data_base as m_data
 import auto
 import os 
-print(r"C:\Users\epi99\OneDrive\workTable")
+#print(r"C:\Users\epi99\OneDrive\workTable")
 try:
     #print(os.path.abspath(__file__+"/../auto/auto.exe"))
    # os.link(os.path.abspath(__file__+"/../auto/auto.exe"),os.path.abspath(__file__+"/../weather_app.lnk"))
@@ -27,3 +27,4 @@ ctk_rg.registration()
 m_data.screen.mainloop()
 m_data.data.commit()
 m_data.data.close()
+#пока

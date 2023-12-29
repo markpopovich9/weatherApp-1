@@ -9,8 +9,9 @@ import modules.ctk.registration as ct_reg
 import time
 import modules.api as m_api
 # print(time.)
+
 def revision(city_name, text,y,text_1,color= "#096C82"):
-    data1 = m_api.get_api(city_name)
+    data1 = m_data.dict_api[city_name]
     text_2 = m_api.text(data1)
     temp1 = data1["main"]
     temp2 = m_api.temp(temp1["temp"])
@@ -24,7 +25,8 @@ def revision(city_name, text,y,text_1,color= "#096C82"):
     text4 = ct_text.Text(text=temp2+"⁰",x=158+19,y=y+12,height=0,width=56,size=50,fg_color=color)
     text5 = ct_text.Text(text=f"макс.: {temp4}⁰, мин.: {temp3}⁰",x=122+19,y=y+76,height=0,width=56,size=12,fg_color=color)
 def time1(text1,number,image,x,count = 0):
-    data= m_api.get_api()
+    # data= m_api.get_api()
+    data= m_data.dict_api[m_data.city]      
     sunset=m_api.time1(data,sun="set")
     sunrise=m_api.time1(data,sun="rise")
     img=m_api.image(data)
@@ -68,7 +70,7 @@ def delete():
     
 #sunset = None
 #sunrise = None
-print(time.localtime())
+#print(time.localtime())
 def check():
     global enter
     text = enter.get()
@@ -80,8 +82,8 @@ def check():
             create()
 def create():
     global enter
-    data= m_api.get_api()
-
+    # data= m_api.get_api()
+    data= m_data.dict_api[m_data.city]
     time_now = f"{time.localtime()[3]}:{time.localtime()[4]}"
     time_now1 =f"{time.localtime()[3]-1}:{time.localtime()[4]}"
     time_now2 = f"{time.localtime()[3]-2}:{time.localtime()[4]}"
@@ -173,7 +175,7 @@ def create():
     #         text = sunset["text"]
     y = 31
     for count in range(len(m_data.cities)):
-        data2 = m_api.get_api(m_data.cities[count])
+        data2 = m_data.list_api[count]
         if data2["name"]== data["name"]:
             revision(m_data.cities[count],"Поточна позиція",y,m_data.cities_Ua[count],"#4599A4")
         else:

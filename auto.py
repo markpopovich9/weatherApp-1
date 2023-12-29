@@ -11,7 +11,7 @@ import os
 import getpass
 username=getpass.getuser()
 path=os.path.abspath(__file__+"/../auto"+"/auto.exe")
-print(path,'\n',__file__)
+#print(path,'\n',__file__)
 bat_path=r'C:\Users\%s\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup'%username
 with open(bat_path+"\\open.bat","w+") as file:
     file.write(r'start "name" %s'%path)
