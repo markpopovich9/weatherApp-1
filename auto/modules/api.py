@@ -82,7 +82,7 @@ def time1(data:dict,sun = "set"):
     minute = int((time2-sec)%3600/60)
     hour = int(((time2-sec-minute*60)%216000/60/60-3+time3[3])%24)
     day =  int(((time2-sec-minute*60)%216000/60/60-3+time3[3])/24)
-    print(time2,sec,minute,hour,year)
+    #print(time2,sec,minute,hour,year)
     if len(str(minute))==1:
         minute=str(0)+str(minute)
     if len(str(hour))==1:
@@ -123,10 +123,10 @@ def get_api(city_name = None):
     if response.status_code == 200:
         data = response.json()
         #time1(data)
-        print (time1(data))
+        #print (time1(data))
         # time1(data,"rise")
         return data
     else:
-        print("Error response")
+        print("Error response",city_name)
         print(response)
         return response.status_code

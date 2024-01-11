@@ -9,8 +9,9 @@ import modules.ctk.registration as ct_reg
 import time
 import modules.api as m_api
 # print(time.)
+
 def revision(city_name, text,y,text_1,color= "#096C82"):
-    data1 = m_api.get_api(city_name)
+    data1 = m_data.dict_api[city_name]
     text_2 = m_api.text(data1)
     temp1 = data1["main"]
     temp2 = m_api.temp(temp1["temp"])
@@ -24,7 +25,8 @@ def revision(city_name, text,y,text_1,color= "#096C82"):
     text4 = ct_text.Text(text=temp2+"⁰",x=158+19,y=y+12,height=0,width=56,size=50,fg_color=color)
     text5 = ct_text.Text(text=f"макс.: {temp4}⁰, мин.: {temp3}⁰",x=122+19,y=y+76,height=0,width=56,size=12,fg_color=color)
 def time1(text1,number,image,x,count = 0):
-    data= m_api.get_api()
+    # data= m_api.get_api()
+    data= m_data.dict_api[m_data.city]      
     sunset=m_api.time1(data,sun="set")
     sunrise=m_api.time1(data,sun="rise")
     img=m_api.image(data)
@@ -68,7 +70,7 @@ def delete():
     
 #sunset = None
 #sunrise = None
-print(time.localtime())
+#print(time.localtime())
 def check():
     global enter
     text = enter.get()
@@ -80,8 +82,8 @@ def check():
             create()
 def create():
     global enter
-    data= m_api.get_api()
-
+    # data= m_api.get_api()
+    data= m_data.dict_api[m_data.city]
     time_now = f"{time.localtime()[3]}:{time.localtime()[4]}"
     time_now1 =f"{time.localtime()[3]-1}:{time.localtime()[4]}"
     time_now2 = f"{time.localtime()[3]-2}:{time.localtime()[4]}"
@@ -99,7 +101,6 @@ def create():
         times = [time_now3,time_now3,time_now,time_now1,time_now,time_now]
     if m_data.city  == "London":
         times = [time_now4,time_now4,time_now3,time_now,time_now3,time_now3]
-    # print(time_now)
     temp = m_api.temp(data["main"]["temp"])
     min_temp =  m_api.temp(data["main"]["temp_min"])
     max_temp =  m_api.temp(data["main"]["temp_max"])
@@ -173,7 +174,7 @@ def create():
     #         text = sunset["text"]
     y = 31
     for count in range(len(m_data.cities)):
-        data2 = m_api.get_api(m_data.cities[count])
+        data2 = m_data.list_api[count]
         if data2["name"]== data["name"]:
             revision(m_data.cities[count],"Поточна позиція",y,m_data.cities_Ua[count],"#4599A4")
         else:
@@ -193,7 +194,12 @@ def create():
     text0.place(x=380,y=39,)
     text1 = ctk.CTkLabel(font=font,master=m_data.screen,width=314,height=61,text="Поточна позіція",text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
     text1.place(x = 576 ,y = 101)
-    text2 = ctk.CTkLabel(font=font,master=m_data.screen,width=87,height=31,text=m_data.city,text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
+    city_name =m_data.city
+    for count_1 in range(6):
+        print(m_data.cities[count_1])
+        if data["name"] == m_data.cities[count_1]:
+            city_name = m_data.cities_Ua[count_1]
+    text2 = ctk.CTkLabel(font=font,master=m_data.screen,width=87,height=31,text=city_name,text_color="#FFFFFF",bg_color="#5DA7B1",fg_color="#5DA7B1")
     text2.place(x = 689, y = 162)
 
     text3 = ct_text.Text(f"{temp}⁰",683,203,71,79,80)
@@ -223,9 +229,20 @@ def create():
         day = "Субота"
     elif day == 6:
         day = "Неділя"
-    text11 = ct_text.Text(text=day,x=956,y=191,height=31,width=105,size=18)
-    text12 = ct_text.Text(text=f"{time.localtime()[2]}.{time.localtime()[1]}.23",x=936,y=227,height=47,width=146,size=40)
-    text13 = ct_text.Text(text=time_now,x=974,y=274,height=47,width=70,size=30)
+    text11 = ct_text.Text(text=day,x=990,y=191,height=31,width=105,size=18)
+    print(time.localtime())
+    date = ""
+    if len(f"{time.localtime()[2]}")==2:
+        date+=f"{time.localtime()[2]}."
+    else:
+        date+=f"0{time.localtime()[2]}."
+    if len(f"{time.localtime()[1]}")==2:
+        date+=f"{time.localtime()[1]}."
+    else:
+        date+=f"0{time.localtime()[1]}."
+    date+=f"{time.localtime()[0]}"
+    text12 = ct_text.Text(text=date,x=936,y=227,height=47,width=146,size=40)
+    text13 = ct_text.Text(text=time_now,x=990,y=274,height=47,width=70,size=30)
     
     text14 = ct_text.Text(text=">",x=1160,y=524,height=31,width=18,size=50)
     text15 = ct_text.Text(text="<",x=289,y=524,height=31,width=18,size=50)

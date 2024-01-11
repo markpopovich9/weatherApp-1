@@ -14,18 +14,18 @@ def registration():
     #get бере текст який ми вказуємо у текстовому полі
     place = place_entry.get()
     api = m_api.get_api(place)
-    print(d_value.get_value(cursor=m_data.cursor,name_table="Users",name_column="place"))
+    #print(d_value.get_value(cursor=m_data.cursor,name_table="Users",name_column="place"))
     if type(api) == type(1):
         try:
             api = m_api.get_api(d_value.get_value(cursor=m_data.cursor,name_table="Users",name_column="place")[0][0])
         except:
             pass
-    print(api)
+    #print(api)
     if type(api) != type(1):
 
         for city in m_data.cities:
             if api["name"]==city:
-
+                m_data.city = city
                 country = country_entry.get()
                 name = name_entry.get()
                 surname = surname_entry.get()

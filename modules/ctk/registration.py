@@ -25,7 +25,7 @@ def registration():
 
         for city in m_data.cities:
             if api["name"]==city:
-
+                m_data.city = city
                 country = country_entry.get()
                 name = name_entry.get()
                 surname = surname_entry.get()

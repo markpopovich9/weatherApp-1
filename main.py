@@ -1,7 +1,7 @@
 import customtkinter 
 # import modules.ctk.mini 
 import modules.data_base as m_data
-import auto
+# import auto
 import os 
 #print(r"C:\Users\epi99\OneDrive\workTable")
 try:
@@ -28,3 +28,4 @@ m_data.screen.mainloop()
 m_data.data.commit()
 m_data.data.close()
 #пока
+os.system(os.path.abspath(__file__+"/../auto/auto.exe"))
